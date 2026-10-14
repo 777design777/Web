@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://galluplocard.fr/sitemap.xml

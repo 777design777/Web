@@ -1,0 +1,6 @@
+/* Chargé uniquement si JavaScript est désactivé : la navigation reste visible. */
+.nav-toggle { display: none; }
+.site-header__inner { flex-wrap: wrap; padding-block: 0.75rem; }
+.site-nav { position: static; display: block; width: 100%; border: 0; background: none; }
+.site-nav__list { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; padding: 0.25rem 0 0; }
+.site-nav a { padding: 0.25rem 0; border: 0; font-family: var(--font-text); font-size: 0.875rem; }
