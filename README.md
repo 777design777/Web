@@ -125,6 +125,7 @@ l’adresse dans `sitemap.xml`.
 | `gaule/gaule-promenade` | page « Promenade historique » | aucun (image entière) |
 | `gaule/gaule-itineraire` | page guide / calendrier | quelques pixels retirés en bas (ligne de texte coupée) |
 | `gaule/gaule-autun` | page « Avtvn » | aucun (image entière) |
+| `gaule/gaule-quiz` | écran de quiz « Question #4 » | aucun (image entière) |
 
 Aucun contenu d’image n’a été modifié (ni redessiné, ni retouché).
 Les planches de présentation n’ont servi que de référence.

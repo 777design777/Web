@@ -786,9 +786,16 @@ a:hover { text-decoration-thickness: 2px; }
   border-style: dashed;
   border-color: rgba(52, 36, 26, 0.35);
 }
-.project-theme-gaule .shots { columns: 1; }
-@media (min-width: 40em) and (max-width: 63.99em) {
-  .project-theme-gaule .shots { columns: 2; }
+/* Galerie : première image en pleine largeur, les suivantes deux par deux */
+.project-theme-gaule .shots { columns: auto; }
+@media (min-width: 40em) {
+  .project-theme-gaule .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem);
+  }
+  .project-theme-gaule .shot { margin: 0; }
+  .project-theme-gaule .shot:first-child { grid-column: 1 / -1; }
 }
 @media (min-width: 64em) {
   /* Légère inclinaison façon tirages posés sur la table */
