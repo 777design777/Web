@@ -8,7 +8,14 @@ Poids total : environ 2 Mo.
 
 ```
 /
-├── index.html             page d’accueil (one-page)
+├── index.html             accueil (un seul écran)
+├── projets.html           liste des projets (une carte par projet)
+├── projets/
+│   ├── isis.html          page du projet ISIS
+│   └── voyage-en-gaule.html  page du projet Voyage en Gaule
+├── esprit.html            L’esprit Gallup & Locard
+├── a-propos.html          À propos
+├── contact.html           Contact
 ├── mentions-legales.html  mentions légales (champs [À COMPLÉTER] à remplir)
 ├── 404.html               page d’erreur
 ├── robots.txt
@@ -18,7 +25,7 @@ Poids total : environ 2 Mo.
 │   ├── style.css          tous les styles (sections numérotées et commentées)
 │   └── nojs.css           complément si JavaScript est désactivé
 ├── js/
-│   └── main.js            menu mobile, sommaire, visionneuse d’images, animations
+│   └── main.js            menu mobile, visionneuse d’images, animations
 └── assets/
     ├── fonts/             Fraunces + Instrument Sans (auto-hébergées, licence OFL)
     └── images/
@@ -28,6 +35,9 @@ Poids total : environ 2 Mo.
         ├── favicon.svg, apple-touch-icon.png
         └── og-galluplocard.jpg (aperçu pour les réseaux sociaux)
 ```
+
+L’en-tête (menu) et le pied de page sont identiques sur toutes les pages. Pour
+modifier le menu, il faut faire la même modification dans chaque fichier `.html`.
 
 ## Tester le site sur un ordinateur
 
@@ -47,9 +57,8 @@ dans le dossier `www` d’OVH.
 1. Connectez-vous en FTP/SFTP à l’hébergement (FileZilla, Cyberduck…) avec les
    identifiants FTP de l’espace client OVH.
 2. Ouvrez le dossier **`www`** (racine du site).
-3. Transférez-y **tout le contenu** du projet : `index.html`, `mentions-legales.html`,
-   `404.html`, `robots.txt`, `sitemap.xml`, `.htaccess`, et les dossiers `css`, `js`,
-   `assets`.
+3. Transférez-y **tout le contenu** du projet : tous les fichiers `.html`, `robots.txt`,
+   `sitemap.xml`, `.htaccess`, et les dossiers `projets`, `css`, `js`, `assets`.
    - `.htaccess` est un fichier caché : activez l’affichage des fichiers cachés dans
      votre logiciel FTP.
    - `README.md` n’a pas besoin d’être envoyé.
@@ -71,11 +80,11 @@ Pour **remplacer** une image en gardant son nom (le plus simple) :
 3. Écrasez les fichiers existants dans `assets/images/...` **avec les mêmes noms**.
    Exemple pour la mallette ISIS : `isis-mallette.jpg` et `isis-mallette-594.webp`.
 4. Si les proportions changent, mettez à jour `width="…"` et `height="…"` de la balise
-   `<img>` correspondante dans `index.html` (dimensions réelles du JPG). Cela évite
+   `<img>` correspondante dans la page concernée (dimensions réelles du JPG). Cela évite
    les sauts de mise en page.
 
 Pour **ajouter** une image à une galerie : copiez un bloc `<li class="shot">…</li>`
-existant dans `index.html`, changez les chemins, les dimensions, le texte alternatif
+existant dans la page du projet (`projets/…html`), changez les chemins, les dimensions, le texte alternatif
 (`alt`) et la légende. La visionneuse et la mise en page s’adaptent toutes seules.
 
 > Note : un seul fichier WebP par image suffit. Les variantes `-640` servent juste à
@@ -84,22 +93,30 @@ existant dans `index.html`, changez les chemins, les dimensions, le texte altern
 
 ## Ajouter un troisième projet (ou plus)
 
+Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projets.html`.
+
 1. **Images** : créez un dossier `assets/images/nom-du-projet/` et placez-y vos visuels.
-2. **HTML** : dans `index.html`, copiez un bloc `<article class="project …">…</article>`
-   complet (ISIS ou Voyage en Gaule) et collez-le à l’endroit marqué
-   « AJOUTER UN PROJET ». Modifiez :
-   - `id="projet-nom"`
-   - `data-index-title` et `data-index-tag` : le projet apparaîtra automatiquement
-     dans le sommaire de l’accueil ;
-   - le numéro (`03`), la catégorie, le titre, le sous-titre, le texte ;
-   - les images, textes alternatifs et légendes ;
-   - la mise en page, au choix :
+2. **La page du projet** : dupliquez `projets/isis.html` (ou `voyage-en-gaule.html`)
+   et renommez la copie, par exemple `projets/nom-du-projet.html`. Dans ce fichier,
+   modifiez :
+   - le `<title>`, la `description` et les deux adresses `galluplocard.fr/projets/…`
+     (balises `canonical` et `og:url`) en haut du fichier ;
+   - le numéro (`03`), la catégorie, le titre, le sous-titre et le texte ;
+   - les images, textes alternatifs et légendes (les chemins commencent par
+     `../assets/…` car la page est dans le dossier `projets/`) ;
+   - la mise en page, sur la balise `<article>` :
      - `project--split` : texte à gauche, visuel à droite, galerie dessous ;
      - `project--split project--reverse` : visuel à gauche, texte à droite ;
-     - `project--wide` : grand visuel en haut, puis texte et galerie côte à côte.
+     - `project--wide` : grand visuel en haut, puis texte et galerie côte à côte ;
    - la galerie : `shots` (colonnes souples) ou `shots shots--rows` (rangées
-     d’images de même hauteur, idéal pour des captures d’écran).
-3. **Univers graphique** : dans `css/style.css`, section 8 « THÈMES DE PROJETS »,
+     d’images de même hauteur, idéal pour des captures d’écran) ;
+   - en bas de page, les liens « Projet précédent / Projet suivant ».
+     Pensez aussi à ajouter le lien « Projet suivant » sur la page du projet
+     précédent (aujourd’hui `voyage-en-gaule.html`).
+3. **La carte** : dans `projets.html`, copiez un bloc `<li>…</li>` de la liste
+   `project-cards`, collez-le à la fin et changez le lien, le thème, le numéro,
+   les textes et l’image.
+4. **Univers graphique** : dans `css/style.css`, section 8 « THÈMES DE PROJETS »,
    dupliquez un thème et renommez-le, par exemple :
 
    ```css
@@ -112,18 +129,13 @@ existant dans `index.html`, changez les chemins, les dimensions, le texte altern
    }
    ```
 
-   puis mettez `project-theme-nom` sur l’`<article>`. Sans thème, le projet prend
-   automatiquement l’identité sobre de Gallup & Locard.
-4. **Bouton « Voir le projet »** : un modèle commenté se trouve dans le bloc ISIS
-   (`project__actions`).
-5. Quand le moment sera venu, supprimez le bloc `<p class="… projects__more" …>`
-   (« D’autres expériences sont en développement. ») : la mention disparaît aussi
-   du sommaire de l’accueil.
-6. Mettez à jour la date `<lastmod>` de `sitemap.xml`.
-
-Pour une future **page individuelle** de projet : partir de `mentions-legales.html`
-(même en-tête et pied de page), y coller le bloc `<article>` du projet, et ajouter
-l’adresse dans `sitemap.xml`.
+   puis mettez `project-theme-nom` sur l’`<article>` de la page **et** sur la carte.
+   Sans thème, le projet prend automatiquement l’identité sobre de Gallup & Locard.
+5. **Bouton « Voir le projet en ligne »** : un modèle commenté se trouve dans
+   `projets/isis.html` (`project__actions`).
+6. Ajoutez l’adresse de la nouvelle page dans `sitemap.xml`.
+7. Quand le moment sera venu, supprimez dans `projets.html` le bloc
+   « D’autres expériences sont en développement. ».
 
 ## Images utilisées
 

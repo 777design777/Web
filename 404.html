@@ -7,15 +7,52 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/style.css">
+  <noscript><link rel="stylesheet" href="/css/nojs.css"></noscript>
+  <script src="/js/main.js" defer></script>
 </head>
 <body>
-  <main id="contenu" class="page">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- ============ EN-TÊTE (identique sur toutes les pages) ============ -->
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="wordmark" href="/index.html" aria-label="Gallup &amp; Locard — accueil">
+        Gallup <span class="wordmark__amp">&amp;</span> Locard
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="nav-toggle__label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale" data-nav>
+        <ul class="site-nav__list">
+          <li><a href="/index.html">Accueil</a></li>
+          <li><a href="/projets.html">Projets</a></li>
+          <li><a href="/esprit.html">L’esprit Gallup &amp; Locard</a></li>
+          <li><a href="/a-propos.html">À propos</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" class="main page">
     <div class="container">
       <p class="eyebrow">Erreur 404</p>
       <h1>Cette piste ne mène nulle part.</h1>
       <p>La page demandée n’existe pas ou a été déplacée. L’enquête continue sur la page d’accueil.</p>
-      <p class="back"><a class="button" href="/">Retour à l’accueil</a></p>
+      <p class="back"><a class="button" href="/index.html">Retour à l’accueil</a></p>
     </div>
   </main>
+
+  <!-- ============ PIED DE PAGE (identique sur toutes les pages) ============ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="wordmark wordmark--small">Gallup <span class="wordmark__amp">&amp;</span> Locard</p>
+      <p class="site-footer__copy">© 2026 Gallup &amp; Locard</p>
+      <p><a class="site-footer__link" href="/mentions-legales.html">Mentions légales</a></p>
+    </div>
+  </footer>
 </body>
 </html>

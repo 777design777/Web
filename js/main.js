@@ -12,10 +12,8 @@
   document.addEventListener("DOMContentLoaded", function () {
     initNav();
     initHeaderShadow();
-    initProjectIndex();
     initShotRatios();
     initReveal();
-    initScrollSpy();
     initLightbox();
   });
 
@@ -55,48 +53,6 @@
     window.addEventListener("scroll", update, { passive: true });
   }
 
-  /* Sommaire de l’accueil, construit à partir des <article class="project">.
-     Ajouter un projet dans la page suffit à le faire apparaître ici. */
-  function initProjectIndex() {
-    var index = document.querySelector("[data-project-index]");
-    if (!index) return;
-    var list = index.querySelector("ol");
-    var projects = document.querySelectorAll(".project[id]");
-    if (!projects.length) return;
-
-    projects.forEach(function (project, i) {
-      var title = project.getAttribute("data-index-title") ||
-        (project.querySelector(".project__title") || {}).textContent || "";
-      var tag = project.getAttribute("data-index-tag") || "";
-      var numEl = project.querySelector(".project__num");
-      var num = numEl ? numEl.textContent.trim() : String(i + 1).padStart(2, "0");
-
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = "#" + project.id;
-      a.innerHTML =
-        '<span class="hero__index-num"></span>' +
-        '<span class="hero__index-name"></span>' +
-        '<span class="hero__index-tag"></span>';
-      a.children[0].textContent = num;
-      a.children[1].textContent = title.trim();
-      a.children[2].textContent = tag;
-      li.appendChild(a);
-      list.appendChild(li);
-    });
-
-    // Reprend la phrase « D’autres expériences… » tant qu’elle existe dans la page
-    var more = document.querySelector("[data-projects-more]");
-    if (more) {
-      var p = document.createElement("li");
-      p.className = "hero__index-more";
-      p.textContent = more.textContent.replace("✦", "").trim();
-      list.appendChild(p);
-    }
-
-    index.hidden = false;
-  }
-
   /* Ratio des images pour les galeries en rangées (.shots--rows) */
   function initShotRatios() {
     document.querySelectorAll(".shots--rows .shot").forEach(function (shot) {
@@ -110,8 +66,8 @@
   /* Apparition douce des blocs au défilement */
   function initReveal() {
     var targets = document.querySelectorAll(
-      ".section-head, .project__head, .project__body, .project__main, .shot, " +
-      ".projects__more, .spirit__quote, .spirit__coda, .about__inner, .contact__inner"
+      ".page-head, .project-cards > li, .project__body, .project__gallery .shot, " +
+      ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body"
     );
     if (reduceMotion || !("IntersectionObserver" in window)) return;
 
@@ -127,30 +83,6 @@
     targets.forEach(function (el) {
       el.classList.add("reveal");
       io.observe(el);
-    });
-  }
-
-  /* Lien actif dans la navigation */
-  function initScrollSpy() {
-    if (!("IntersectionObserver" in window)) return;
-    var links = document.querySelectorAll(".site-nav a[href^='#']");
-    var map = {};
-    links.forEach(function (link) {
-      var section = document.querySelector(link.getAttribute("href"));
-      if (section) map[section.id] = link;
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (l) { l.removeAttribute("aria-current"); });
-        var link = map[entry.target.id];
-        if (link) link.setAttribute("aria-current", "true");
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-
-    Object.keys(map).forEach(function (id) {
-      io.observe(document.getElementById(id));
     });
   }
 

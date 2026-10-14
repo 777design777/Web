@@ -12,12 +12,11 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Gallup &amp; Locard">
   <meta property="og:title" content="Gallup &amp; Locard — Jeux, énigmes et expériences interactives">
-  <meta property="og:description" content="Des jeux, des énigmes et des expériences interactives qui font entrer la fiction dans le réel.">
+  <meta property="og:description" content="Gallup &amp; Locard imagine des jeux, des énigmes et des expériences interactives qui font entrer la fiction dans le réel : enquêtes immersives, parcours patrimoniaux, objets, documents et interfaces numériques.">
   <meta property="og:url" content="https://galluplocard.fr/">
   <meta property="og:image" content="https://galluplocard.fr/assets/images/og-galluplocard.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Gallup &amp; Locard — studio indépendant de jeux, d’énigmes et d’expériences interactives">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
@@ -42,10 +41,10 @@
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <!-- ============ EN-TÊTE ============ -->
+  <!-- ============ EN-TÊTE (identique sur toutes les pages) ============ -->
   <header class="site-header" data-header>
     <div class="container site-header__inner">
-      <a class="wordmark" href="#accueil" aria-label="Gallup &amp; Locard — retour à l’accueil">
+      <a class="wordmark" href="index.html" aria-label="Gallup &amp; Locard — accueil">
         Gallup <span class="wordmark__amp">&amp;</span> Locard
       </a>
 
@@ -56,20 +55,18 @@
 
       <nav class="site-nav" id="site-nav" aria-label="Navigation principale" data-nav>
         <ul class="site-nav__list">
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#projets">Projets</a></li>
-          <li><a href="#esprit">L’esprit Gallup &amp; Locard</a></li>
-          <li><a href="#a-propos">À propos</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html" aria-current="page">Accueil</a></li>
+          <li><a href="projets.html">Projets</a></li>
+          <li><a href="esprit.html">L’esprit Gallup &amp; Locard</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="contenu">
-
-    <!-- ============ ACCUEIL ============ -->
-    <section class="hero" id="accueil" aria-labelledby="titre-site">
+  <main id="contenu" class="main main--home">
+    <section class="hero" aria-labelledby="titre-site">
       <div class="container hero__inner">
         <div class="hero__text">
           <p class="eyebrow">Studio indépendant · Jeux, énigmes &amp; expériences interactives</p>
@@ -79,7 +76,7 @@
           </h1>
           <p class="hero__lead">Des jeux, des énigmes et des expériences interactives qui font entrer la fiction dans le réel.</p>
           <p class="hero__sub">Des expériences pensées à la frontière du jeu, de la narration, du numérique et du monde tangible.</p>
-          <p><a class="button" href="#projets">Découvrir les projets <span class="button__arrow" aria-hidden="true">→</span></a></p>
+          <p><a class="button" href="projets.html">Découvrir les projets <span class="button__arrow" aria-hidden="true">→</span></a></p>
         </div>
 
         <!-- Constellation décorative : quelques étoiles reliées par un fil -->
@@ -103,287 +100,11 @@
             </g>
           </svg>
         </div>
-
-        <!-- Sommaire généré automatiquement par js/main.js à partir des projets de la page -->
-        <nav class="hero__index" aria-label="Sommaire des projets" hidden data-project-index>
-          <p class="hero__index-title">Au sommaire</p>
-          <ol class="hero__index-list"></ol>
-        </nav>
       </div>
     </section>
-
-    <!-- ============ PROJETS ============ -->
-    <section class="projects" id="projets" aria-labelledby="titre-projets">
-      <div class="container section-head">
-        <p class="eyebrow">Les expériences</p>
-        <h2 class="section-title" id="titre-projets">Nos projets</h2>
-        <p class="section-intro">Des univers différents, une même envie : faire vivre des histoires autrement.</p>
-      </div>
-
-      <div class="projects__list">
-
-        <!-- ======================================================
-             PROJET 01 — ISIS
-             Mise en page : project--split (texte à gauche, visuel à droite,
-             galerie en dessous). Univers : .project-theme-isis
-             ====================================================== -->
-        <article class="project project-theme-isis project--split" id="projet-isis"
-                 data-index-title="ISIS" data-index-tag="Enquête immersive et transmédia">
-          <div class="project__inner">
-
-            <header class="project__head">
-              <p class="project__meta"><span class="project__num">01</span> <span class="project__kicker">Dossier · Enquête</span></p>
-              <h3 class="project__title">ISIS</h3>
-              <p class="project__subtitle">Expérience d’enquête immersive et transmédia</p>
-            </header>
-
-            <div class="project__body">
-              <p class="project__desc">Une enquête qui mêle objets physiques, documents, indices, manipulation et interface numérique. ISIS, l’agence fictive développée pour l’expérience, accompagne les joueurs tout au long de leur mission : accès sécurisés, cartes, dossiers, agenda opérationnel et contenus débloqués progressivement.</p>
-
-              <div class="project__facets">
-                <div class="facet">
-                  <h4 class="facet__title">Expérience physique</h4>
-                  <p>Mallette, documents, indices et éléments manipulables.</p>
-                </div>
-                <div class="facet">
-                  <h4 class="facet__title">Expérience numérique</h4>
-                  <p>Une véritable interface développée pour accompagner le jeu : missions, accès protégés, cartes, Datapass et tableau des opérations.</p>
-                </div>
-              </div>
-
-              <!-- Lien public : décommenter et renseigner l’URL définitive quand elle sera prête
-              <p class="project__actions"><a class="button button--project" href="https://URL-DEFINITIVE" rel="noopener">Voir le projet <span class="button__arrow" aria-hidden="true">→</span></a></p>
-              -->
-            </div>
-
-            <figure class="project__main">
-              <a class="media" href="assets/images/isis/isis-mallette.jpg" data-lightbox="isis">
-                <picture>
-                  <source type="image/webp" srcset="assets/images/isis/isis-mallette-594.webp">
-                  <img src="assets/images/isis/isis-mallette.jpg" width="594" height="448" loading="lazy" decoding="async"
-                       alt="La mallette ISIS ouverte sur un tapis vert, entourée de dossiers confidentiels, d’enveloppes « Top secret », d’un journal, d’un kit de prélèvement et d’une tablette affichant l’interface de l’agence.">
-                </picture>
-              </a>
-              <figcaption>La mallette de mission et ses documents : indices, dossiers et objets à manipuler.</figcaption>
-            </figure>
-
-            <div class="project__gallery">
-              <div class="gallery-head">
-                <h4 class="gallery-head__title">L’interface de l’agence</h4>
-                <p class="gallery-head__note">Prototype numérique fonctionnel développé pour accompagner l’expérience. Captures réelles.</p>
-              </div>
-              <ul class="shots shots--rows" role="list">
-                <li class="shot">
-                  <a class="media" href="assets/images/isis/isis-interface.jpg" data-lightbox="isis">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/isis/isis-interface-640.webp 640w, assets/images/isis/isis-interface-960.webp 960w" sizes="(min-width: 960px) 380px, 50vw">
-                      <img src="assets/images/isis/isis-interface.jpg" width="960" height="1106" loading="lazy" decoding="async"
-                           alt="Écran d’accueil de l’interface ISIS International Secret Agency : champ de mot de passe, boutons Missions, Cartes, LoRa, Datapass, Répertoire et Agenda, réseau neuronal et carte du monde.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Interface principale</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/isis/isis-missions.jpg" data-lightbox="isis">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/isis/isis-missions-470.webp">
-                      <img src="assets/images/isis/isis-missions.jpg" width="470" height="844" loading="lazy" decoding="async"
-                           alt="Fenêtre Missions de l’interface ISIS listant les missions 1 à 8.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Choix des missions</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/isis/isis-agenda.jpg" data-lightbox="isis">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/isis/isis-agenda-640.webp 640w, assets/images/isis/isis-agenda-932.webp 932w" sizes="(min-width: 960px) 800px, 100vw">
-                      <img src="assets/images/isis/isis-agenda.jpg" width="932" height="685" loading="lazy" decoding="async"
-                           alt="Fenêtre « Agenda — Tableau des opérations » : calendrier hebdomadaire indiquant les étapes de la mission jour par jour.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Tableau des opérations</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/isis/isis-acces.jpg" data-lightbox="isis">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/isis/isis-acces-640.webp 640w, assets/images/isis/isis-acces-932.webp 932w" sizes="(min-width: 960px) 800px, 100vw">
-                      <img src="assets/images/isis/isis-acces.jpg" width="932" height="398" loading="lazy" decoding="async"
-                           alt="Fenêtre « Mission — accès protégé » : un cadenas et six cases de code à saisir, avec les boutons Valider et Effacer.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Accès sécurisé</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/isis/isis-cartes.jpg" data-lightbox="isis">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/isis/isis-cartes-488.webp">
-                      <img src="assets/images/isis/isis-cartes.jpg" width="488" height="379" loading="lazy" decoding="async"
-                           alt="Fenêtre « Cartes — Canaries &amp; Cádiz » montrant les îles avec des repères lumineux sur La Palma, Tenerife, La Gomera et Lanzarote.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Cartes et données terrain</p>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </article>
-
-        <!-- ======================================================
-             PROJET 02 — VOYAGE EN GAULE
-             Mise en page : project--wide (grand visuel en haut,
-             texte et galerie en dessous). Univers : .project-theme-gaule
-             ====================================================== -->
-        <article class="project project-theme-gaule project--wide" id="projet-voyage-en-gaule"
-                 data-index-title="Voyage en Gaule" data-index-tag="Voyage ludique et patrimoine">
-          <div class="project__inner">
-
-            <header class="project__head">
-              <p class="project__meta"><span class="project__num">02</span> <span class="project__kicker">Carnet · Patrimoine</span></p>
-              <h3 class="project__title">Voyage <em>en Gaule</em></h3>
-              <p class="project__subtitle">Expérience ludique de voyage et de découverte patrimoniale</p>
-            </header>
-
-            <div class="project__body">
-              <p class="project__desc">Une expérience conçue pour transformer un voyage en parcours ludique et culturel : itinéraires, cartes, découvertes historiques, contenus, quiz et défis accompagnent les participants au fil de leur séjour.</p>
-
-              <ul class="project__tags" role="list">
-                <li>Organisation du voyage</li>
-                <li>Itinéraires</li>
-                <li>Cartes</li>
-                <li>Promenades historiques</li>
-                <li>Contenus culturels</li>
-                <li>Quiz et défis</li>
-                <li>Éléments interactifs</li>
-              </ul>
-            </div>
-
-            <figure class="project__main">
-              <a class="media" href="assets/images/gaule/gaule-promenade.jpg" data-lightbox="gaule">
-                <picture>
-                  <source type="image/webp" srcset="assets/images/gaule/gaule-promenade-640.webp 640w, assets/images/gaule/gaule-promenade-1280.webp 1280w" sizes="(min-width: 1280px) 1180px, 100vw">
-                  <img src="assets/images/gaule/gaule-promenade.jpg" width="1280" height="714" loading="lazy" decoding="async"
-                       alt="Page « Promenade historique » : quatre étapes illustrées et commentées au départ de la Villa de Médicis, à côté d’une carte d’Autun traçant le parcours entre la Porte d’Arroux, la Porte Saint-André, le théâtre romain et les arrêts de bus.">
-                </picture>
-              </a>
-              <figcaption>Promenade historique : les étapes, les défis et la carte du parcours.</figcaption>
-            </figure>
-
-            <div class="project__gallery">
-              <ul class="shots" role="list">
-                <li class="shot">
-                  <a class="media" href="assets/images/gaule/gaule-itineraire.jpg" data-lightbox="gaule">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/gaule/gaule-itineraire-640.webp 640w, assets/images/gaule/gaule-itineraire-1280.webp 1280w" sizes="(min-width: 960px) 560px, 100vw">
-                      <img src="assets/images/gaule/gaule-itineraire.jpg" width="1280" height="688" loading="lazy" decoding="async"
-                           alt="Guide interactif du voyage : quatre journées (Iovis XXIX, Veneris XXX, Sambati XXXI, Dominicus I) avec les temps de trajet en voiture et à pied vers Autun, Bibracte, Alésia, Escolives, Sens et Guédelon.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Guide interactif et organisation des journées</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/gaule/gaule-autun.jpg" data-lightbox="gaule">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/gaule/gaule-autun-640.webp 640w, assets/images/gaule/gaule-autun-1280.webp 1280w" sizes="(min-width: 960px) 560px, 100vw">
-                      <img src="assets/images/gaule/gaule-autun.jpg" width="1280" height="720" loading="lazy" decoding="async"
-                           alt="Page « Avtvn » présentant l’étape d’Autun : heure du coucher de soleil, durées de marche et de bus, heure de réservation, et texte proposant une promenade historique jusqu’au théâtre antique.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Page d’étape : Autun et sa logistique</p>
-                </li>
-                <li class="shot">
-                  <a class="media" href="assets/images/gaule/gaule-quiz.jpg" data-lightbox="gaule">
-                    <picture>
-                      <source type="image/webp" srcset="assets/images/gaule/gaule-quiz-725.webp">
-                      <img src="assets/images/gaule/gaule-quiz.jpg" width="725" height="404" loading="lazy" decoding="async"
-                           alt="Écran de quiz « Question #4 » dans un cadre de téléviseur rétro, sur fond de rayons rouges et crème : « Vercingétorix a jeté son bouclier aux pieds de César lors de sa reddition. », avec les boutons Vrai et Faux.">
-                    </picture>
-                  </a>
-                  <p class="shot__caption">Quiz et contenus ludiques</p>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </article>
-
-        <!-- ======================================================
-             AJOUTER UN PROJET : copier le bloc <article> ci-dessus,
-             le coller ici, puis changer :
-               - id="projet-nom"
-               - data-index-title / data-index-tag (sommaire de l’accueil)
-               - la classe de thème : project-theme-nom (à créer dans css/style.css)
-               - la mise en page : project--split, project--split project--reverse
-                 ou project--wide
-               - numéro, titres, textes, images et textes alternatifs.
-             ====================================================== -->
-
-      </div>
-
-      <!-- Phrase de transition : supprimer ce bloc quand il ne sera plus utile -->
-      <p class="container projects__more" data-projects-more>
-        <span class="projects__more-star" aria-hidden="true">✦</span>
-        D’autres expériences sont en développement.
-      </p>
-    </section>
-
-    <!-- ============ L’ESPRIT ============ -->
-    <section class="spirit" id="esprit" aria-labelledby="titre-esprit">
-      <div class="container spirit__inner">
-        <p class="eyebrow eyebrow--light">Manifeste</p>
-        <h2 class="section-title section-title--light" id="titre-esprit">L’esprit Gallup <span class="amp">&amp;</span> Locard</h2>
-
-        <blockquote class="spirit__quote">
-          <p>Gallup &amp; Locard est une caravane de la soif.</p>
-          <p class="spirit__ask">Soif de quoi, me direz-vous&nbsp;?</p>
-          <p class="spirit__list">D’aventures, d’idéaux, d’expériences, de connaissances, de jeu, de bières et de poésie.</p>
-        </blockquote>
-
-        <p class="spirit__coda">Pour rappeler aux adultes qu’ils sont encore de grands enfants, et faire briller quelques étoiles dans leurs yeux.</p>
-      </div>
-    </section>
-
-    <!-- ============ À PROPOS ============ -->
-    <section class="about" id="a-propos" aria-labelledby="titre-a-propos">
-      <div class="container about__inner">
-        <div class="about__head">
-          <p class="eyebrow">Le studio</p>
-          <h2 class="section-title" id="titre-a-propos">À propos</h2>
-        </div>
-        <div class="about__body">
-          <p class="about__lead">Gallup &amp; Locard est un studio indépendant consacré à la conception d’expériences ludiques et interactives. Chaque projet part d’une idée, d’une histoire ou d’un lieu, puis cherche la forme la plus juste pour lui donner vie : papier, objet, énigme, interface numérique, parcours ou combinaison de plusieurs médias.</p>
-          <p>De nouvelles expériences sont actuellement en développement et en phase de prototypage.</p>
-
-          <h3 class="about__subtitle">Les matières du studio</h3>
-          <ul class="materials" role="list">
-            <li>Narration</li>
-            <li>Énigmes</li>
-            <li>Objets et documents physiques</li>
-            <li>Interfaces numériques</li>
-            <li>Parcours interactifs</li>
-            <li>Patrimoine</li>
-            <li>Contenus culturels</li>
-            <li>Prototypage</li>
-            <li>Recherche de matériaux et procédés interactifs</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact" aria-labelledby="titre-contact">
-      <div class="container contact__inner">
-        <p class="eyebrow">Écrire au studio</p>
-        <h2 class="section-title" id="titre-contact">Contact</h2>
-        <p class="contact__text">Une idée, un lieu, une histoire à faire vivre, ou simplement l’envie d’échanger&nbsp;?</p>
-        <p class="contact__mail"><a href="mailto:contact@galluplocard.fr">contact@galluplocard.fr</a></p>
-        <p><a class="button" href="mailto:contact@galluplocard.fr">Me contacter <span class="button__arrow" aria-hidden="true">→</span></a></p>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ============ PIED DE PAGE ============ -->
+  <!-- ============ PIED DE PAGE (identique sur toutes les pages) ============ -->
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <p class="wordmark wordmark--small">Gallup <span class="wordmark__amp">&amp;</span> Locard</p>
@@ -391,16 +112,5 @@
       <p><a class="site-footer__link" href="mentions-legales.html">Mentions légales</a></p>
     </div>
   </footer>
-
-  <!-- Visionneuse d’images (activée par js/main.js) -->
-  <dialog class="lightbox" aria-label="Visionneuse d’images" data-lightbox-dialog>
-    <div class="lightbox__frame">
-      <img class="lightbox__img" alt="" data-lightbox-img>
-      <p class="lightbox__caption" data-lightbox-caption></p>
-    </div>
-    <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close aria-label="Fermer">×</button>
-    <button class="lightbox__btn lightbox__prev" type="button" data-lightbox-prev aria-label="Image précédente">←</button>
-    <button class="lightbox__btn lightbox__next" type="button" data-lightbox-next aria-label="Image suivante">→</button>
-  </dialog>
 </body>
 </html>

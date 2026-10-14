@@ -7,23 +7,54 @@
   <meta name="description" content="Mentions légales du site galluplocard.fr, édité par Gallup &amp; Locard.">
   <link rel="canonical" href="https://galluplocard.fr/mentions-legales.html">
   <meta name="theme-color" content="#f3efe7">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Gallup &amp; Locard">
+  <meta property="og:title" content="Mentions légales — Gallup &amp; Locard">
+  <meta property="og:description" content="Mentions légales du site galluplocard.fr, édité par Gallup &amp; Locard.">
+  <meta property="og:url" content="https://galluplocard.fr/mentions-legales.html">
+  <meta property="og:image" content="https://galluplocard.fr/assets/images/og-galluplocard.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-opsz.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
+  <noscript><link rel="stylesheet" href="css/nojs.css"></noscript>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <header class="site-header is-scrolled">
+  <!-- ============ EN-TÊTE (identique sur toutes les pages) ============ -->
+  <header class="site-header" data-header>
     <div class="container site-header__inner">
-      <a class="wordmark" href="./" aria-label="Gallup &amp; Locard — retour à l’accueil">
+      <a class="wordmark" href="index.html" aria-label="Gallup &amp; Locard — accueil">
         Gallup <span class="wordmark__amp">&amp;</span> Locard
       </a>
-      <a class="site-footer__link" href="./">← Retour au site</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="nav-toggle__label">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale" data-nav>
+        <ul class="site-nav__list">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="projets.html">Projets</a></li>
+          <li><a href="esprit.html">L’esprit Gallup &amp; Locard</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main id="contenu" class="page">
+  <main id="contenu" class="main page">
     <div class="container">
       <h1>Mentions légales</h1>
 
@@ -66,10 +97,11 @@
       <h2>Liens</h2>
       <p>Le site peut contenir des liens vers des sites tiers. Gallup &amp; Locard n’exerce aucun contrôle sur leur contenu et décline toute responsabilité à leur égard.</p>
 
-      <p class="back"><a class="button" href="./">Retour à l’accueil</a></p>
+      <p class="back"><a class="button" href="index.html">Retour à l’accueil</a></p>
     </div>
   </main>
 
+  <!-- ============ PIED DE PAGE (identique sur toutes les pages) ============ -->
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <p class="wordmark wordmark--small">Gallup <span class="wordmark__amp">&amp;</span> Locard</p>

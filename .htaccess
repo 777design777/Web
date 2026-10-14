@@ -10,6 +10,10 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^www\. [NC]
   RewriteRule ^ https://galluplocard.fr%{REQUEST_URI} [L,R=301]
+
+  # /index.html → / (adresse plus propre ; les liens internes restent valables)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [L,R=301]
 </IfModule>
 
 # Pas de listing des dossiers
