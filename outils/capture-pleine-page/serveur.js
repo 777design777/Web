@@ -39,6 +39,9 @@ const PAGE = `<!doctype html>
   details summary { cursor: pointer; color: var(--doux); }
   details[open] summary { margin-bottom: 12px; }
   details .ligne + label, details label + label { margin-top: 12px; }
+  label.case { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 1rem; }
+  label.case input { width: auto; margin-top: 4px; }
+  #continuer { display: none; margin-top: 16px; }
   button { font: inherit; font-weight: 600; padding: 11px 18px; border: 0; border-radius: 8px;
            background: var(--accent); color: #fff; cursor: pointer; justify-self: start; }
   button:disabled { opacity: .6; cursor: wait; }
@@ -70,6 +73,9 @@ const PAGE = `<!doctype html>
         <select name="echelle"><option value="1">Normale (×1)</option><option value="2">Retina (×2)</option></select>
       </label>
     </div>
+    <label class="case"><input name="connexion" type="checkbox">
+      <span>Cette page demande d’être connecté <small>(espace client, commande…) : une fenêtre s’ouvre pour vous connecter avant la capture</small></span>
+    </label>
     <details>
       <summary>Réglages avancés</summary>
       <div class="ligne">
@@ -93,9 +99,12 @@ const PAGE = `<!doctype html>
     <button id="go">Capturer la page</button>
   </form>
   <div id="etat" aria-live="polite"></div>
+  <button id="continuer" type="button">Je suis connecté, la page est affichée : lancer la capture</button>
   <div id="resultat"></div>
 </main>
 <script>
+const continuer = document.getElementById('continuer');
+continuer.addEventListener('click', () => { continuer.style.display = 'none'; fetch('/continuer', { method: 'POST' }); });
 const f = document.getElementById('f'), etat = document.getElementById('etat'),
       resultat = document.getElementById('resultat'), go = document.getElementById('go');
 let ancienLien = null;
@@ -116,6 +125,7 @@ f.addEventListener('submit', async (e) => {
       while ((i = tampon.indexOf('\\n')) >= 0) {
         const msg = JSON.parse(tampon.slice(0, i)); tampon = tampon.slice(i + 1);
         if (msg.journal) etat.textContent += '• ' + msg.journal + '\\n';
+        if (msg.attenteConnexion) continuer.style.display = 'block';
         if (msg.erreur) etat.textContent += '✗ ' + msg.erreur + '\\n';
         if (msg.fichier) afficher(msg);
       }
@@ -123,7 +133,7 @@ f.addEventListener('submit', async (e) => {
   } catch (err) {
     etat.textContent += '✗ ' + err.message + '\\n';
   } finally {
-    go.disabled = false; go.textContent = 'Capturer la page';
+    go.disabled = false; go.textContent = 'Capturer la page'; continuer.style.display = 'none';
   }
 });
 async function afficher(msg) {
@@ -144,6 +154,7 @@ async function afficher(msg) {
 const dossier = fs.mkdtempSync(path.join(os.tmpdir(), 'capture-'));
 let navigateur = null;
 let file = Promise.resolve(); // une capture à la fois
+let reprendre = null;         // débloque une capture en attente de connexion
 
 function nomFichier(url, format) {
   let base = 'capture';
@@ -170,12 +181,15 @@ async function traiterCapture(req, res) {
   const envoyer = (o) => res.write(JSON.stringify(o) + '\n');
 
   const format = ['png', 'jpg', 'pdf'].includes(d.format) ? d.format : 'png';
+  const connexion = d.connexion === 'on';
   const nom = nomFichier(d.url, format);
   const tache = file.then(async () => {
     try {
-      navigateur = navigateur && navigateur.isConnected()
-        ? navigateur
-        : await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
+      if (!connexion) {
+        navigateur = navigateur && navigateur.isConnected()
+          ? navigateur
+          : await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
+      }
       const r = await capturer(String(d.url || '').trim(), path.join(dossier, nom), {
         navigateur,
         mobile: d.affichage === 'mobile',
@@ -187,6 +201,12 @@ async function traiterCapture(req, res) {
         cliquer: d.cliquer ? [String(d.cliquer)] : [],
         masquer: liste(d.masquer),
         journal: (m) => envoyer({ journal: m }),
+        connexion,
+        attendreConnexion: () => new Promise((resolve) => {
+          reprendre = resolve;
+          envoyer({ attenteConnexion: true });
+          res.on('close', resolve); // onglet de l'interface fermé : on n'attend pas indéfiniment
+        }),
       });
       envoyer({ fichier: nom, nom, largeur: r.largeur, hauteur: r.hauteur });
     } catch (e) {
@@ -202,6 +222,9 @@ const serveur = http.createServer(async (req, res) => {
   try {
     if (req.method === 'GET' && req.url === '/') {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(PAGE);
+    } else if (req.method === 'POST' && req.url === '/continuer') {
+      if (reprendre) { reprendre(); reprendre = null; }
+      res.writeHead(204).end();
     } else if (req.method === 'POST' && req.url === '/capture') {
       await traiterCapture(req, res);
     } else if (req.method === 'GET' && req.url.startsWith('/fichier/')) {

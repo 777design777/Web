@@ -22,6 +22,9 @@ const PAR_DEFAUT = {
   masquer: [],             // sélecteurs CSS à masquer (bandeaux cookies, chat…)
   cliquer: [],             // sélecteurs CSS à cliquer avant de défiler (« Accepter »…)
   pleineQualite: 90,       // qualité JPEG
+  connexion: false,        // fenêtre visible pour se connecter avant la capture
+  profil: path.join(__dirname, 'profil-navigateur'), // connexions conservées (mode connexion)
+  attendreConnexion: async () => {},
   delaiNavigation: 60000,
   journal: () => {},
 };
@@ -213,8 +216,7 @@ async function capturer(url, sortie, options = {}) {
   }
 
   const chemin = o.cheminChromium || process.env.CHROMIUM;
-  const navigateur = o.navigateur || (await chromium.launch(chemin ? { executablePath: chemin } : {}));
-  const contexte = await navigateur.newContext({
+  const reglagesContexte = {
     viewport: o.mobile ? { width: 390, height: 844 } : { width: o.largeur, height: o.hauteurFenetre },
     deviceScaleFactor: o.mobile ? Math.max(o.echelle, 2) : o.echelle,
     isMobile: o.mobile,
@@ -223,14 +225,47 @@ async function capturer(url, sortie, options = {}) {
       ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1'
       : undefined,
     locale: 'fr-FR',
-  });
-  const page = await contexte.newPage();
-  const reseau = suivreReseau(page);
+  };
+
+  // Mode connexion : fenêtre visible et profil conservé sur le disque, pour pouvoir
+  // se connecter à un compte (espace client, commande…) et le rester d'une fois sur l'autre.
+  let navigateur = null;
+  let contexte;
+  if (o.connexion) {
+    if (format === 'pdf') throw new Error('Le PDF n\'est pas possible en mode connexion : utiliser .png ou .jpg');
+    contexte = await chromium.launchPersistentContext(o.profil, {
+      ...reglagesContexte,
+      headless: false,
+      executablePath: chemin || undefined,
+      ignoreDefaultArgs: ['--enable-automation'],
+      args: ['--disable-blink-features=AutomationControlled'],
+    });
+  } else {
+    navigateur = o.navigateur || (await chromium.launch(chemin ? { executablePath: chemin } : {}));
+    contexte = await navigateur.newContext(reglagesContexte);
+  }
+  let page = contexte.pages()[0] || (await contexte.newPage());
+  let reseau = suivreReseau(page);
 
   try {
     o.journal(`Ouverture de ${url}`);
     await page.goto(url, { waitUntil: 'load', timeout: o.delaiNavigation });
     await reseau.calme(500, 10000);
+
+    if (o.connexion) {
+      o.journal('En attente de la connexion dans la fenêtre du navigateur…');
+      await o.attendreConnexion();
+      // La connexion a pu ouvrir un nouvel onglet : on capture le dernier ouvert.
+      const ouvertes = contexte.pages().filter((p) => !p.isClosed());
+      if (!ouvertes.length) throw new Error('La fenêtre du navigateur a été fermée');
+      if (ouvertes[ouvertes.length - 1] !== page) {
+        page = ouvertes[ouvertes.length - 1];
+        reseau = suivreReseau(page);
+      }
+      await page.bringToFront();
+      await reseau.calme(500, 10000);
+      o.journal(`Capture de ${page.url()} — ne touchez plus à la fenêtre jusqu'à la fin`);
+    }
 
     for (const sel of o.cliquer) {
       try {
@@ -252,6 +287,8 @@ async function capturer(url, sortie, options = {}) {
     // Retour en haut : les en-têtes fixes et les animations retrouvent leur état initial.
     await page.evaluate(defilerVers, 0);
     if (type === 'element') await page.evaluate(deplierDefileur);
+    // Fenêtre visible : la barre de défilement réduirait la largeur de la capture.
+    if (o.connexion) await page.addStyleTag({ content: 'html { scrollbar-width: none !important; }' });
     if (o.masquer.length) {
       await page.addStyleTag({
         content: `${o.masquer.join(', ')} { visibility: hidden !important; display: none !important; }`,
@@ -290,7 +327,7 @@ async function capturer(url, sortie, options = {}) {
     return { sortie, largeur: page.viewportSize().width, hauteur: hauteurCapture };
   } finally {
     await contexte.close();
-    if (!o.navigateur) await navigateur.close();
+    if (navigateur && !o.navigateur) await navigateur.close();
   }
 }
 
@@ -317,6 +354,8 @@ Options :
   --attente N         attente avant la capture, en ms (défaut ${PAR_DEFAUT.attenteFinale})
   --cliquer "sel"     clique sur un élément avant de défiler (ex. bouton « Accepter » des cookies)
   --masquer "sel"     masque des éléments (ex. "#cookie-banner, .chat-widget")
+  --connexion         page qui demande d'être connecté (espace client, commande…) :
+                      ouvre une fenêtre pour se connecter, puis capture après « Entrée »
   --chromium chemin   utiliser un Chromium déjà installé
   --silencieux        n'affiche pas la progression
 
@@ -324,6 +363,7 @@ Exemples :
   node capture.js https://exemple.fr
   node capture.js exemple.fr page.jpg --largeur 1920 --echelle 2
   node capture.js exemple.fr --mobile --cliquer "text=Tout accepter"
+  node capture.js "https://shopify.com/…/account/orders/…" commande.png --connexion
 `;
 
 function lireArguments(args) {
@@ -352,6 +392,7 @@ function lireArguments(args) {
       case '--attente': opts.attenteFinale = nombre(suivant(), a); break;
       case '--cliquer': opts.cliquer.push(suivant()); break;
       case '--masquer': opts.masquer.push(suivant()); break;
+      case '--connexion': opts.connexion = true; break;
       case '--chromium': opts.cheminChromium = suivant(); break;
       case '--silencieux': opts.silencieux = true; break;
       default:
@@ -388,6 +429,16 @@ if (require.main === module) {
     }
     const [url, sortie = nomParDefaut(libres[0])] = libres;
     if (!opts.silencieux) opts.journal = (m) => console.log('•', m);
+    if (opts.connexion) {
+      opts.attendreConnexion = () => new Promise((resolve) => {
+        const rl = require('readline').createInterface({ input: process.stdin, output: process.stdout });
+        rl.question(
+          '\n→ Dans la fenêtre qui vient de s\'ouvrir, connectez-vous et affichez la page à capturer.\n' +
+          '  Appuyez ensuite sur Entrée ici pour lancer la capture… ',
+          () => { rl.close(); resolve(); }
+        );
+      });
+    }
     try {
       const r = await capturer(url, sortie, opts);
       console.log(`✓ ${path.resolve(r.sortie)} (${r.largeur} × ${r.hauteur} px)`);

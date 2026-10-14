@@ -39,6 +39,27 @@ puis ouvrir http://localhost:3000 dans le navigateur, coller l’adresse et
 cliquer sur « Capturer la page ». La progression s’affiche, puis l’aperçu et
 le lien de téléchargement.
 
+## Pages qui demandent d’être connecté (espace client, commande…)
+
+Une page de compte (par exemple une commande Shopify
+`https://shopify.com/…/account/orders/…`) n’est visible qu’une fois connecté :
+les services de capture en ligne n’y ont pas accès.
+
+- **Interface** : cocher « Cette page demande d’être connecté ». Une fenêtre de
+  navigateur s’ouvre ; s’y connecter (e-mail, code reçu…) jusqu’à voir la page,
+  puis cliquer sur « Je suis connecté… lancer la capture » dans l’interface.
+- **Ligne de commande** :
+  ```
+  node capture.js "https://shopify.com/…/account/orders/…" commande.png --connexion
+  ```
+  se connecter dans la fenêtre qui s’ouvre, puis appuyer sur Entrée dans le terminal.
+
+Ne plus toucher à la fenêtre pendant la capture (l’outil la fait défiler).
+La connexion est conservée dans le dossier `profil-navigateur/` : la fois
+suivante, la page s’affiche directement. Ce dossier contient vos sessions —
+ne pas le partager ; le supprimer pour se déconnecter. (En mode connexion,
+formats PNG ou JPEG uniquement.)
+
 ## Utilisation en ligne de commande
 
 ```
@@ -63,6 +84,7 @@ Formats : `.png` (défaut), `.jpg` (plus léger) ou `.pdf` (une seule page, trè
 | `--attente N` | attente avant la capture, en ms | 1000 |
 | `--cliquer "sél"` | clic avant de défiler (bandeau cookies…) | — |
 | `--masquer "sél"` | éléments à cacher sur la capture | — |
+| `--connexion` | se connecter dans une fenêtre avant la capture (voir plus haut) | — |
 | `--chromium chemin` | utiliser un Chromium déjà installé | — |
 
 ## Conseils
@@ -73,5 +95,3 @@ Formats : `.png` (défaut), `.jpg` (plus léger) ou `.pdf` (une seule page, trè
   s’arrête à `--hauteur-max` ou au bout de `--duree-max`.
 - **Bandeau de cookies sur la capture** : `--cliquer "text=Accepter"` (le texte
   exact du bouton) ou `--masquer` avec le sélecteur CSS du bandeau.
-- Les pages qui demandent une connexion (compte, espace client) ne peuvent pas
-  être capturées : le navigateur de l’outil n’est connecté à aucun compte.
