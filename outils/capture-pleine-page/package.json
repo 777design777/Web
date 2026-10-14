@@ -1,0 +1,16 @@
+{
+  "name": "capture-pleine-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Captures d'écran pleine page des sites dynamiques (chargement complet par défilement avant la capture)",
+  "main": "capture.js",
+  "bin": { "capture-pleine-page": "capture.js" },
+  "scripts": {
+    "capture": "node capture.js",
+    "interface": "node serveur.js",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.56.1"
+  }
+}

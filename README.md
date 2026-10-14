@@ -172,3 +172,11 @@ Les planches de présentation n’ont servi que de référence.
 Volontairement **non publiées** : la capture Datapass (billets de train réels avec
 données personnelles et QR codes) et la carte illustrée de La Gomera (illustration
 d’origine tierce probable).
+
+## Outils de travail
+
+Le dossier `outils/` contient des outils pour le travail sur le site, **à ne pas
+mettre en ligne** (il est de toute façon bloqué par `outils/.htaccess`) :
+
+- `outils/capture-pleine-page/` : captures d’écran pleine page de n’importe quel
+  site, après chargement complet par défilement (voir son README).
