@@ -313,6 +313,7 @@ a:hover { text-decoration-thickness: 2px; }
 .hero {
   position: relative;
   flex: 1;
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1055,10 +1056,8 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* 11. Contact */
 .contact {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding-block: var(--section-space);
+  padding-block: clamp(4rem, 9vw, 6.5rem);
+  border-top: 1px solid var(--line);
   text-align: center;
 }
 .contact__inner { display: grid; justify-items: center; width: 100%; }
@@ -1066,7 +1065,7 @@ a:hover { text-decoration-thickness: 2px; }
 .contact__mail {
   margin: 1.5rem 0 2.25rem;
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 5.5vw, 3rem);
+  font-size: clamp(1.4rem, 5.5vw, 2.6rem);
   letter-spacing: -0.01em;
   overflow-wrap: anywhere;
 }

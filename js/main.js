@@ -67,7 +67,7 @@
   function initReveal() {
     var targets = document.querySelectorAll(
       ".page-head, .project-cards > li, .project__body, .project__gallery .shot, " +
-      ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body"
+      ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body, .contact__inner"
     );
     if (reduceMotion || !("IntersectionObserver" in window)) return;
 

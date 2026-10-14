@@ -15,7 +15,6 @@ Poids total : environ 2 Mo.
 │   └── voyage-en-gaule.html  page du projet Voyage en Gaule
 ├── esprit.html            L’esprit Gallup & Locard
 ├── a-propos.html          À propos
-├── contact.html           Contact
 ├── mentions-legales.html  mentions légales (champs [À COMPLÉTER] à remplir)
 ├── 404.html               page d’erreur
 ├── robots.txt
@@ -36,8 +35,9 @@ Poids total : environ 2 Mo.
         └── og-galluplocard.jpg (aperçu pour les réseaux sociaux)
 ```
 
-L’en-tête (menu) et le pied de page sont identiques sur toutes les pages. Pour
-modifier le menu, il faut faire la même modification dans chaque fichier `.html`.
+L’en-tête (menu), la section Contact et le pied de page sont identiques sur toutes
+les pages. Pour les modifier, il faut faire la même modification dans chaque fichier
+`.html`. Le lien « Contact » du menu fait descendre à la section Contact de la page.
 
 ## Tester le site sur un ordinateur
 
