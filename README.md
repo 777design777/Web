@@ -66,6 +66,20 @@ dans le dossier `www` d’OVH.
    est actif pour `galluplocard.fr` : le `.htaccess` redirige automatiquement vers
    `https://galluplocard.fr`.
 
+## Mettre à jour le site en ligne
+
+Transférez à nouveau les fichiers modifiés dans le dossier `www` (en écrasant les
+anciens). Le plus simple : renvoyer tout le contenu du dossier `galluplocard-site`.
+
+Grâce au fichier `.htaccess`, les navigateurs vérifient à chaque visite si les pages,
+le CSS et le JavaScript ont changé : une mise à jour est visible immédiatement.
+Les images sont gardées en mémoire 1 jour : après avoir remplacé une photo, testez
+en navigation privée pour la voir tout de suite.
+
+Si un jour une modification du CSS ou du JavaScript ne s’affiche pas, augmentez le
+numéro de version dans toutes les pages HTML : `style.css?v=2` → `style.css?v=3`
+(et de même pour `main.js?v=2`).
+
 ## Remplacer ou ajouter une image
 
 Chaque image existe en deux formats : **WebP** (léger, utilisé en priorité) et

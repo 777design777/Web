@@ -84,6 +84,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   margin: 0;
+  overflow-x: clip;   /* filet de sécurité : la page ne peut pas déborder en largeur */
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-text);
@@ -322,6 +323,7 @@ a:hover { text-decoration-thickness: 2px; }
 .hero__inner {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 3rem;
 }
 .hero__text { position: relative; z-index: 1; }
@@ -329,7 +331,7 @@ a:hover { text-decoration-thickness: 2px; }
 .hero__title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(3.2rem, min(12.5vw, 15vh), 8rem);
+  font-size: clamp(2.6rem, min(12.5vw, 15vh), 8rem);
   line-height: 0.88;
   letter-spacing: -0.035em;
   text-transform: uppercase;
@@ -414,6 +416,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 .projects__list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -443,6 +446,7 @@ a:hover { text-decoration-thickness: 2px; }
 .project__inner {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "head" "main" "body" "gallery";
   gap: clamp(2rem, 5vw, 3rem);
   padding: clamp(3rem, 8vw, 6rem) var(--gutter);
@@ -671,8 +675,10 @@ a:hover { text-decoration-thickness: 2px; }
    --------------------------------------------------------- */
 .project-cards {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.5rem, 3.5vw, 2.5rem);
 }
+.project-cards > li { display: flex; min-width: 0; }
 @media (min-width: 52em) {
   .project-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -688,7 +694,8 @@ a:hover { text-decoration-thickness: 2px; }
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
   overflow: hidden;
   background: var(--p-bg);
   color: var(--p-ink);
@@ -704,15 +711,18 @@ a:hover { text-decoration-thickness: 2px; }
   .project-card:hover .button__arrow { transform: translateX(4px); }
 }
 
+/* Le format 16:9 est porté par l’image elle-même, jamais par un cadre dont
+   l’image prendrait « 100 % de la hauteur » : sur iPhone/iPad, Safari pouvait
+   sinon agrandir l’image à chaque défilement. */
 .project-card__media {
-  aspect-ratio: 16 / 9;
+  flex: none;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.08);
 }
-.project-card__media picture { height: 100%; }
 .project-card__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   transition: transform 0.7s var(--ease);
 }
@@ -810,7 +820,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 .project-pager {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   padding-block: clamp(2.5rem, 6vw, 4rem);
 }
@@ -958,7 +968,7 @@ a:hover { text-decoration-thickness: 2px; }
 @media (min-width: 40em) {
   .project-theme-gaule .shots {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem);
   }
   .project-theme-gaule .shot { margin: 0; }
@@ -1032,7 +1042,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* 10. À propos */
 .about { padding-block: var(--section-space); }
-.about__inner { display: grid; gap: 2rem; }
+.about__inner { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
 .about__lead {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.6vw, 1.7rem);
@@ -1069,7 +1079,7 @@ a:hover { text-decoration-thickness: 2px; }
   border-top: 1px solid var(--line);
   text-align: center;
 }
-.contact__inner { display: grid; justify-items: center; width: 100%; }
+.contact__inner { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; width: 100%; }
 .contact__text { margin-top: 1.5rem; max-width: 40ch; color: var(--ink-soft); }
 .contact__mail {
   margin: 1.5rem 0 2.25rem;
