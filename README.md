@@ -17,9 +17,10 @@ Poids total : environ 2 Mo.
 ├── a-propos.html          À propos
 ├── mentions-legales.html  mentions légales
 ├── 404.html               page d’erreur
+├── favicon.ico            icône de l’onglet (navigateurs anciens)
 ├── robots.txt
 ├── sitemap.xml
-├── .htaccess              HTTPS, cache, compression, sécurité (Apache / OVH)
+├── .htaccess              HTTPS, redirections, cache, compression, sécurité (Apache / OVH)
 ├── css/
 │   ├── style.css          tous les styles (sections numérotées et commentées)
 │   └── nojs.css           complément si JavaScript est désactivé

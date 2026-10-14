@@ -120,7 +120,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: 1rem;
   top: -4rem;
   z-index: 100;
@@ -225,6 +225,10 @@ a:hover { text-decoration-thickness: 2px; }
   color: var(--accent);
 }
 .wordmark--small { font-size: 1rem; }
+@media (max-width: 22.5em) {
+  /* très petits téléphones (320–360 px) : le logo laisse de la place au bouton Menu */
+  .site-header .wordmark { font-size: 1.02rem; letter-spacing: 0.04em; }
+}
 
 .nav-toggle {
   display: inline-flex;
@@ -261,6 +265,13 @@ a:hover { text-decoration-thickness: 2px; }
   display: none;
 }
 .site-nav.is-open { display: block; }
+/* Le menu ouvert ne dépasse jamais du bas de l’écran (téléphone à l’horizontale) */
+.site-nav {
+  max-height: calc(100vh - var(--header-h));
+  max-height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 .site-nav__list {
   list-style: none;
   margin: 0;
@@ -275,12 +286,19 @@ a:hover { text-decoration-thickness: 2px; }
   text-decoration: none;
 }
 .site-nav a[aria-current] { color: var(--accent-ink); }
+@media (max-height: 30em) {
+  /* écran bas (téléphone à l’horizontale) : menu plus compact */
+  .site-nav__list { padding-bottom: 0.75rem; }
+  .site-nav a { padding: 0.45rem 0; font-size: 1.1rem; }
+}
 
 @media (min-width: 60em) {
   .nav-toggle { display: none; }
   .site-nav {
     position: static;
     display: block;
+    max-height: none;
+    overflow: visible;
     background: none;
     border: 0;
   }
@@ -382,6 +400,8 @@ a:hover { text-decoration-thickness: 2px; }
 .constellation__dust circle { fill: var(--ink); opacity: 0.45; }
 
 @media (min-width: 64em) {
+  /* Deux colonnes : le titre doit tenir dans la colonne de gauche (iPad paysage, 1024 px) */
+  .hero__title { font-size: clamp(2.6rem, min(10vw, 15vh), 8rem); }
   .hero__inner {
     grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
     align-items: center;
@@ -486,7 +506,7 @@ a:hover { text-decoration-thickness: 2px; }
   letter-spacing: -0.03em;
   font-variation-settings: "opsz" 144;
 }
-.project__title em { font-style: italic; font-weight: 400; color: var(--p-accent); }
+.project__title em { font-style: italic; font-weight: 400; color: var(--p-accent); white-space: nowrap; }
 .project__subtitle {
   margin-top: 1.25rem;
   max-width: 32ch;
@@ -627,6 +647,8 @@ a:hover { text-decoration-thickness: 2px; }
     align-items: start;
   }
 
+  .project__title { font-size: clamp(3rem, 6.5vw, 6.5rem); }
+
   .project--split .project__inner {
     grid-template-areas:
       "head    main"
@@ -742,7 +764,7 @@ a:hover { text-decoration-thickness: 2px; }
   letter-spacing: -0.02em;
   font-variation-settings: "opsz" 144;
 }
-.project-card__title em { font-style: italic; font-weight: 400; color: var(--p-accent); }
+.project-card__title em { font-style: italic; font-weight: 400; color: var(--p-accent); white-space: nowrap; }
 .project-card__title a { text-decoration: none; }
 /* Lien étendu : toute la carte mène à la page du projet */
 .project-card__title a::after {
@@ -813,6 +835,9 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: 0.875rem;
 }
 .project__back a {
+  display: inline-block;
+  padding: 0.45rem 0;
+  margin: -0.45rem 0;
   color: var(--p-muted);
   text-decoration: none;
 }
@@ -1105,7 +1130,12 @@ a:hover { text-decoration-thickness: 2px; }
   gap: 0.75rem 2rem;
 }
 .site-footer .wordmark { color: var(--ink); }
-.site-footer__link { text-decoration: underline; }
+.site-footer__link {
+  display: inline-block;
+  padding: 0.45rem 0;   /* zone tactile confortable sans changer l’apparence */
+  margin: -0.45rem 0;
+  text-decoration: underline;
+}
 
 /* 13. Visionneuse
    Mise en page en flex (et non en grille) : Safari sur iPhone/iPad déforme
@@ -1244,6 +1274,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 @media print {
-  .site-header, .lightbox, .hero__art { display: none !important; }
+  .site-header, .lightbox, .hero__art, .skip-link { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .project { background: none !important; color: #000; }
 }

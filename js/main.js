@@ -34,6 +34,10 @@
     nav.addEventListener("click", function (e) {
       if (e.target.closest("a")) setOpen(false);
     });
+    // Un toucher en dehors du menu le referme
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("is-open") && !nav.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) {
         setOpen(false);
@@ -63,13 +67,16 @@
     });
   }
 
-  /* Apparition douce des blocs au défilement */
+  /* Apparition douce des blocs au défilement.
+     Seuls les blocs situés plus bas que l’écran au chargement sont concernés :
+     ce qui est déjà visible ne disparaît jamais (pas de clignotement). */
   function initReveal() {
     var targets = document.querySelectorAll(
       ".page-head, .project-cards > li, .project__body, .project__gallery .shot, " +
       ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body, .contact__inner"
     );
     if (reduceMotion || !("IntersectionObserver" in window)) return;
+    var fold = window.innerHeight || document.documentElement.clientHeight;
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -81,6 +88,7 @@
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
 
     targets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < fold) return;
       el.classList.add("reveal");
       io.observe(el);
     });
@@ -92,6 +100,7 @@
     if (!dialog || typeof dialog.showModal !== "function") return; // sans support : le lien ouvre l’image
 
     var img = dialog.querySelector("[data-lightbox-img]");
+    var blank = img.getAttribute("src"); // image vide affichée quand la visionneuse est fermée
     var caption = dialog.querySelector("[data-lightbox-caption]");
     var prev = dialog.querySelector("[data-lightbox-prev]");
     var next = dialog.querySelector("[data-lightbox-next]");
@@ -150,7 +159,7 @@
 
     dialog.addEventListener("close", function () {
       document.body.style.overflow = "";
-      img.removeAttribute("src");
+      img.src = blank;
       if (opener) opener.focus();
     });
   }
