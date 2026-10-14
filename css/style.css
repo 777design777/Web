@@ -1160,7 +1160,6 @@ a:hover { text-decoration-thickness: 2px; }
 .page p,
 .page ul { margin-bottom: 1rem; color: var(--ink-soft); }
 .page ul { padding-left: 1.2rem; }
-.page .todo { background: #f6e3b4; color: var(--ink); padding: 0 0.25em; font-weight: 600; }
 .page .back { margin-top: 3rem; }
 
 /* 15. Animations et préférences */

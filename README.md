@@ -15,7 +15,7 @@ Poids total : environ 2 Mo.
 │   └── voyage-en-gaule.html  page du projet Voyage en Gaule
 ├── esprit.html            L’esprit Gallup & Locard
 ├── a-propos.html          À propos
-├── mentions-legales.html  mentions légales (champs [À COMPLÉTER] à remplir)
+├── mentions-legales.html  mentions légales
 ├── 404.html               page d’erreur
 ├── robots.txt
 ├── sitemap.xml
@@ -65,7 +65,6 @@ dans le dossier `www` d’OVH.
 4. Dans l’espace client OVH, vérifiez que le **certificat SSL** (Let’s Encrypt, gratuit)
    est actif pour `galluplocard.fr` : le `.htaccess` redirige automatiquement vers
    `https://galluplocard.fr`.
-5. Remplissez les champs `[À COMPLÉTER]` de `mentions-legales.html` avant publication.
 
 ## Remplacer ou ajouter une image
 
