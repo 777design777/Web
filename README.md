@@ -29,6 +29,19 @@ Poids total : environ 2 Mo.
         └── og-galluplocard.jpg (aperçu pour les réseaux sociaux)
 ```
 
+## Tester le site sur un ordinateur
+
+1. Décompressez l’archive `galluplocard-site.zip`.
+2. Ouvrez le dossier `galluplocard-site`, puis double-cliquez sur **`index.html`** :
+   le site s’ouvre dans votre navigateur, sans connexion ni installation.
+
+Tout fonctionne ainsi (navigation, galeries, visionneuse, version mobile via le mode
+« responsive » du navigateur). Seuls la page 404 et les réglages du `.htaccess`
+(HTTPS, cache) ne s’activent qu’une fois le site en ligne chez OVH.
+
+Le contenu du dossier `galluplocard-site` est exactement ce qu’il faut transférer
+dans le dossier `www` d’OVH.
+
 ## Mise en ligne chez OVH
 
 1. Connectez-vous en FTP/SFTP à l’hébergement (FileZilla, Cyberduck…) avec les
