@@ -12,7 +12,8 @@ Poids total : environ 2 Mo.
 ├── projets.html           liste des projets (une carte par projet)
 ├── projets/
 │   ├── isis.html          page du projet ISIS
-│   └── voyage-en-gaule.html  page du projet Voyage en Gaule
+│   ├── voyage-en-gaule.html  page du projet Voyage en Gaule
+│   └── enquete-en-kabylie.html  page du projet Enquête en Kabylie (mise en page sur mesure)
 ├── esprit.html            L’esprit Gallup & Locard
 ├── a-propos.html          À propos
 ├── mentions-legales.html  mentions légales
@@ -31,6 +32,7 @@ Poids total : environ 2 Mo.
     └── images/
         ├── isis/
         ├── gaule/
+        ├── kabylie/           visuel d’ambiance + frise tissée (tissage.svg)
         ├── future-projects/   (vide, prêt pour la suite)
         ├── favicon.svg, apple-touch-icon.png
         └── og-galluplocard.jpg (aperçu pour les réseaux sociaux)
@@ -105,7 +107,7 @@ existant dans la page du projet (`projets/…html`), changez les chemins, les di
 > alléger l’affichage sur mobile ; vous pouvez les omettre en gardant une seule
 > adresse dans `srcset`.
 
-## Ajouter un troisième projet (ou plus)
+## Ajouter un quatrième projet (ou plus)
 
 Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projets.html`.
 
@@ -115,7 +117,7 @@ Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projet
    modifiez :
    - le `<title>`, la `description` et les deux adresses `galluplocard.fr/projets/…`
      (balises `canonical` et `og:url`) en haut du fichier ;
-   - le numéro (`03`), la catégorie, le titre, le sous-titre et le texte ;
+   - le numéro (`04`), la catégorie, le titre, le sous-titre et le texte ;
    - les images, textes alternatifs et légendes (les chemins commencent par
      `../assets/…` car la page est dans le dossier `projets/`) ;
    - la mise en page, sur la balise `<article>` :
@@ -126,7 +128,7 @@ Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projet
      d’images de même hauteur, idéal pour des captures d’écran) ;
    - en bas de page, les liens « Projet précédent / Projet suivant ».
      Pensez aussi à ajouter le lien « Projet suivant » sur la page du projet
-     précédent (aujourd’hui `voyage-en-gaule.html`).
+     précédent (aujourd’hui `enquete-en-kabylie.html`).
 3. **La carte** : dans `projets.html`, copiez un bloc `<li>…</li>` de la liste
    `project-cards`, collez-le à la fin et changez le lien, le thème, le numéro,
    les textes et l’image.
@@ -145,6 +147,14 @@ Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projet
 
    puis mettez `project-theme-nom` sur l’`<article>` de la page **et** sur la carte.
    Sans thème, le projet prend automatiquement l’identité sobre de Gallup & Locard.
+
+   Pour une page entièrement sur mesure, comme `enquete-en-kabylie.html` :
+   ses styles sont regroupés dans `css/style.css`, section 7d, et toutes ses
+   classes commencent par `kab-`. Un nouveau projet peut suivre le même principe
+   avec son propre préfixe, sans toucher aux autres pages.
+
+   Dans `projets.html`, les cartes s’affichent deux par deux ; quand leur nombre
+   est impair, la dernière prend automatiquement toute la largeur.
 5. **Bouton « Voir le projet en ligne »** : un modèle commenté se trouve dans
    `projets/isis.html` (`project__actions`).
 6. Ajoutez l’adresse de la nouvelle page dans `sitemap.xml`.
@@ -165,6 +175,8 @@ Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projet
 | `gaule/gaule-itineraire` | page guide / calendrier | quelques pixels retirés en bas (ligne de texte coupée) |
 | `gaule/gaule-autun` | page « Avtvn » | aucun (image entière) |
 | `gaule/gaule-quiz` | écran de quiz « Question #4 » | aucun (image entière) |
+| `kabylie/kabylie-visuel` | visuel d’ambiance, **extrait de la maquette verte** (original non fourni) | recadrage sur la photo, sans le panneau de texte ni la légende — **à remplacer par le visuel original en haute définition** |
+| `kabylie/tissage.svg` | frise tissée de la maquette bleue | redessinée en vecteur point par point (l’extrait de la maquette ne fait que 45 px de large), couleurs accordées au thème vert |
 
 Aucun contenu d’image n’a été modifié (ni redessiné, ni retouché).
 Les planches de présentation n’ont servi que de référence.

@@ -73,7 +73,8 @@
   function initReveal() {
     var targets = document.querySelectorAll(
       ".page-head, .project-cards > li, .project__body, .project__gallery .shot, " +
-      ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body, .contact__inner"
+      ".projects__more, .project-pager, .spirit__quote, .spirit__coda, .about__body, .contact__inner, " +
+      ".kab-story__text, .kab-steps > li, .kab-band__inner"
     );
     if (reduceMotion || !("IntersectionObserver" in window)) return;
     var fold = window.innerHeight || document.documentElement.clientHeight;
