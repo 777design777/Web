@@ -175,7 +175,7 @@ Un projet = **une page** dans le dossier `projets/` + **une carte** dans `projet
 | `gaule/gaule-itineraire` | page guide / calendrier | quelques pixels retirés en bas (ligne de texte coupée) |
 | `gaule/gaule-autun` | page « Avtvn » | aucun (image entière) |
 | `gaule/gaule-quiz` | écran de quiz « Question #4 » | aucun (image entière) |
-| `kabylie/kabylie-visuel` | visuel d’ambiance fourni (1280 × 853) | retouché pour plus de crédibilité : vrai nonogramme redessiné en perspective ; photo du journal remplacée par « Centre ville de Tizi Ouzou (Algérie) », Magharebia, CC BY 2.0 ; tirage ancien remplacé par la carte postale « Gare de Tizi Ouzou » (vers 1900, domaine public), via Wikimedia Commons — crédits dans les mentions légales |
+| `kabylie/kabylie-visuel` | visuel d’ambiance fourni (1536 × 1024) | aucun (image entière) |
 | `kabylie/tissage.svg` | frise tissée de la maquette bleue | redessinée en vecteur point par point (l’extrait de la maquette ne fait que 45 px de large), couleurs accordées au thème vert |
 
 Aucun contenu d’image n’a été modifié (ni redessiné, ni retouché).
